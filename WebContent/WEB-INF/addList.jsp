@@ -7,11 +7,7 @@
     
 <%
 
-	GuestbookDao guestbookDao = new GuestbookDao();
-	List<GuestbookVo> guestbookList = guestbookDao.getGuestbookList();
-	
-	System.out.println(guestbookList.toString());
-
+ 	List<GuestbookVo> guestbookList = (List<GuestbookVo>)request.getAttribute("gList");
 
 %>    
     
@@ -24,7 +20,7 @@
 <body>
 
 
-	<form action ="./add.jsp" method="post">
+	<form action ="/guestbook2/gbc?action=add" method="post">
 		<table border='1'>
 			<tr>
 				<td>이름</td>
@@ -55,7 +51,7 @@
 					<td><%=guestbookList.get(i).getNo() %></td>
 					<td><%=guestbookList.get(i).getName() %></td>
 					<td><%=guestbookList.get(i).getRegDate() %></td>
-					<td><a href="./deleteForm.jsp?id=<%=guestbookList.get(i).getNo() %>">삭제</a></td>
+					<td><a href="/guestbook2/gbc?action=dform&no=<%=guestbookList.get(i).getNo() %>">삭제</a></td>
 				</tr>
 				<tr>
 					<td colspan ='4'><%=guestbookList.get(i).getContent() %></td>

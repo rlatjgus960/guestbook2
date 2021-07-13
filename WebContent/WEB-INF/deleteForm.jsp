@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%
-	int no = Integer.parseInt(request.getParameter("id"));
+	int no = Integer.parseInt(request.getParameter("no"));
 %>
    
 <!DOCTYPE html>
@@ -13,12 +13,12 @@
 </head>
 <body>
 
-	<form action ="./delete.jsp" method="post">
+	<form action ="/guestbook2/gbc?action=delete" method="post">
 		<input type="hidden" name="no" value="<%=no %>">
 		비밀번호<input type="password" name="password" value="">
 		<button type="submit">확인</button>
 	</form>
 	
-	<a href="./addList.jsp">메인으로 돌아가기</a>
+	<a href="/guestbook2/gbc?action=list">메인으로 돌아가기</a>
 </body>
 </html>
