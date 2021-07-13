@@ -17,7 +17,11 @@ import com.javaex.vo.GuestbookVo;
 @WebServlet("/gbc")
 public class GuestController extends HttpServlet {
 
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println("컨트롤러");
+		request.setCharacterEncoding("UTF-8");
 		
 		String action = request.getParameter("action");
 		
@@ -35,7 +39,7 @@ public class GuestController extends HttpServlet {
 			
 		}else if("add".equals(action)) {
 			System.out.println("[추가]");
-		
+			
 			String name = request.getParameter("name");
 			String password = request.getParameter("password");
 			String content = request.getParameter("content");
