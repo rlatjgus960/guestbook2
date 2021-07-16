@@ -12,16 +12,10 @@ public class GuestbookVo {
 		super();
 	}
 
-	
-	
-	
 	public GuestbookVo(int no) {
 		super();
 		this.no = no;
 	}
-
-
-
 
 	public GuestbookVo(int no, String password) {
 		super();
@@ -29,17 +23,12 @@ public class GuestbookVo {
 		this.password = password;
 	}
 
-
-
-
 	public GuestbookVo(String name, String password, String content) {
 		super();
 		this.name = name;
 		this.password = password;
 		this.content = content;
 	}
-
-
 
 	public GuestbookVo(int no, String name, String password, String content, String regDate) {
 		super();

@@ -11,7 +11,7 @@ import java.util.List;
 import com.javaex.vo.GuestbookVo;
 
 public class GuestbookDao {
-	
+
 	// 0. import java.sql.*;
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -54,9 +54,8 @@ public class GuestbookDao {
 			System.out.println("error:" + e);
 		}
 	}
-	
-	
-	//등록
+
+	// 등록
 	public int guestbookInsert(GuestbookVo guestbookVo) {
 		int count = 0;
 		getConnection();
@@ -64,10 +63,9 @@ public class GuestbookDao {
 		try {
 
 			// 3. SQL문 준비 / 바인딩 / 실행
-			String query = ""; 
+			String query = "";
 			query += " insert into guestbook ";
 			query += " values(seq_guestbook_no.nextval, ?, ?, ?, SYSDATE) ";
-			
 
 			pstmt = conn.prepareStatement(query);
 
@@ -86,43 +84,41 @@ public class GuestbookDao {
 		close();
 		return count;
 	}
-	
-	//삭제
+
+	// 삭제
 	public int guestbookDelete(GuestbookVo guestbookVo) {
-		
+
 		int count = -1;
-		
+
 		this.getConnection();
-		
+
 		try {
-		   
-		    // 3. SQL문 준비 / 바인딩 / 실행
-		    String query = "";  
-	        query += " delete from guestbook "; 
-	        query += " where no = ? ";
-	        query += " and password = ? ";
-	         
-		    pstmt = conn.prepareStatement(query); 
-		    pstmt.setInt(1,guestbookVo.getNo());
-		    pstmt.setString(2,guestbookVo.getPassword());
-		         
-		    count = pstmt.executeUpdate(); 
-		        
-	        // 4.결과처리
-		    System.out.println(count +"건 삭제");
+
+			// 3. SQL문 준비 / 바인딩 / 실행
+			String query = "";
+			query += " delete from guestbook ";
+			query += " where no = ? ";
+			query += " and password = ? ";
+
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, guestbookVo.getNo());
+			pstmt.setString(2, guestbookVo.getPassword());
+
+			count = pstmt.executeUpdate();
+
+			// 4.결과처리
+			System.out.println(count + "건 삭제");
 
 		} catch (SQLException e) {
-		    e.printStackTrace();
-		} 
-		
+			e.printStackTrace();
+		}
+
 		this.close();
 
-		
 		return count;
 	}
-	
-	
-	//리스트
+
+	// 리스트
 	public List<GuestbookVo> getGuestbookList() {
 		List<GuestbookVo> guestbookList = new ArrayList<GuestbookVo>();
 
@@ -139,36 +135,32 @@ public class GuestbookDao {
 			query += "         to_char(reg_date, 'YYYY-MM-DD HH24:MI:SS') regDate ";
 			query += " from guestbook";
 			query += " order by reg_date ";
-			
-		    pstmt = conn.prepareStatement(query);
-		    
-		    rs = pstmt.executeQuery();
-			
-		    // 4.결과처리
-			while(rs.next()) {
+
+			pstmt = conn.prepareStatement(query);
+
+			rs = pstmt.executeQuery();
+
+			// 4.결과처리
+			while (rs.next()) {
 				int no = rs.getInt("no");
 				String name = rs.getString("name");
 				String password = rs.getString("password");
 				String content = rs.getString("content");
 				String regDate = rs.getString("regDate");
-				
+
 				GuestbookVo guestbookVo = new GuestbookVo(no, name, password, content, regDate);
-				
+
 				guestbookList.add(guestbookVo);
 			}
-		    
 
 		} catch (SQLException e) {
-		    System.out.println("error:" + e);
-		} 
+			System.out.println("error:" + e);
+		}
 
 		this.close();
-		
-		return guestbookList;
-		
-	}
-	
-	
 
-	
+		return guestbookList;
+
+	}
+
 }
