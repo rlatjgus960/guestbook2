@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%
-int no = Integer.parseInt(request.getParameter("no"));
-%>
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +11,7 @@ int no = Integer.parseInt(request.getParameter("no"));
 <body>
 
 	<form action="/guestbook2/gbc?action=delete" method="post">
-		<input type="hidden" name="no" value="<%=no%>"> 비밀번호<input
+		<input type="hidden" name="no" value="${param.no }"> 비밀번호<input
 			type="password" name="password" value="">
 		<button type="submit">확인</button>
 	</form>
